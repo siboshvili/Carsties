@@ -1,4 +1,3 @@
-"use client";
 import Listings from "./auctions/listings";
 
 export default function Home() {
