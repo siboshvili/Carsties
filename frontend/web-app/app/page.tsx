@@ -1,3 +1,10 @@
+"use client";
+import Listings from "./auctions/listings";
+
 export default function Home() {
-  return <div>Content</div>;
+  return (
+    <div>
+      <Listings />
+    </div>
+  );
 }
