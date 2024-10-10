@@ -1,10 +1,10 @@
-import Image from "next/image";
 import React from "react";
 import CountdownTimer from "./CountdownTimer";
 import CarImage from "./CarImage";
+import { Auctions } from "@/types";
 
 type Props = {
-  auction: any;
+  auction: Auctions;
 };
 
 export default function AuctionCard({ auction }: Props) {
