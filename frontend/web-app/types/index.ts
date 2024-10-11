@@ -4,7 +4,7 @@ export type PagedResult<T> = {
   totalCount: number;
 };
 
-export type Auctions = {
+export type Auction = {
   reservePrice: number;
   seller: string;
   winner?: string;
