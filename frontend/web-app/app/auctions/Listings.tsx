@@ -22,7 +22,7 @@ export default function Listings() {
       orderBy: state.orderBy,
       filterBy: state.filterBy,
       seller: state.seller,
-      winner: state.winner
+      winner: state.winner,
     }))
   );
 
