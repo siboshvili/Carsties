@@ -15,20 +15,20 @@ type Props = {
 };
 
 export default function UserActions({ user }: Props) {
-    const router = useRouter();
-    const pathname = usePathname();
-    const setParams = useParamsStore(state => state.setParams);
+  const router = useRouter();
+  const pathname = usePathname();
+  const setParams = useParamsStore((state) => state.setParams);
 
-    function setWinner(){
-        setParams({winner: user.username, seller: undefined});
-        if(pathname !== '/') router.push('/');
-    }
+  function setWinner() {
+    setParams({ winner: user.username, seller: undefined });
+    if (pathname !== "/") router.push("/");
+  }
 
-    function setSeller(){
-        console.log('a', pathname)
-        setParams({seller: user.username, winner: undefined});
-        if(pathname !== '/') router.push('/');
-    }
+  function setSeller() {
+    console.log("a", pathname);
+    setParams({ seller: user.username, winner: undefined });
+    if (pathname !== "/") router.push("/");
+  }
 
   return (
     <Dropdown label={`Welcome ${user.name}`} inline>
@@ -39,7 +39,7 @@ export default function UserActions({ user }: Props) {
         Auctions won
       </Dropdown.Item>
       <Dropdown.Item icon={AiFillCar}>
-        <Link href="/auction/create">Sell my car</Link>
+        <Link href="/auctions/create">Sell my car</Link>
       </Dropdown.Item>
       <Dropdown.Item icon={HiCog}>
         <Link href="/session">Session (dev only)</Link>
