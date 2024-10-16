@@ -6,6 +6,7 @@ import DetailedSpecs from "./DetailedSpecs";
 import Heading from "@/app/components/Heading";
 import { getCurrentUser } from "@/app/actions/authActions";
 import EditButton from "./EditButton";
+import DeleteButton from "./DeleteButton";
 
 export default async function Details({ params }: { id: string }) {
   const data = await getDetailedViewData(params.id);
@@ -16,7 +17,11 @@ export default async function Details({ params }: { id: string }) {
       <div className="flex justify-between">
         <div className="flex items-center gap-3">
           <Heading title={`${data.make} ${data.model}`} />
-          {user?.username === data.seller && <EditButton id={data.id} />}
+          {user?.username === data.seller && (
+            <>
+              <EditButton id={data.id} /> <DeleteButton id={data.id} />
+            </>
+          )}
         </div>
         <div className="flex gap-3">
           <h3 className="text-2xl font-semibold">Time remaining:</h3>
