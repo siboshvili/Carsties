@@ -1,8 +1,8 @@
-using System;
+using MongoDB.Entities;
 
 namespace BiddingService.Models;
 
-public class Bid
+public class Bid : Entity
 {
     public string AuctionId { get; set; }
     public string Bidder { get; set; }
