@@ -1,6 +1,8 @@
 using AutoMapper;
 using BiddingService.DTOs;
 using BiddingService.Models;
+using Contracts;
+using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -10,13 +12,15 @@ namespace BiddingService.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class BidsController
+public class BidsController : ControllerBase
 {
     private readonly IMapper _mapper;
+    private readonly IPublishEndpoint _publishEndpoint;
 
-    public BidsController(IMapper mapper)
+    public BidsController(IMapper mapper, IPublishEndpoint publishEndpoint)
     {
         _mapper = mapper;
+        _publishEndpoint = publishEndpoint;
     }
 
     [Authorize]
@@ -26,21 +30,21 @@ public class BidsController
         var auction = await DB.Find<Auction>().OneAsync(auctionId);
 
 
-        // if (auction == null)
-        // {
-        //     return NotFound;
-        // }
+        if (auction == null)
+        {
+            return NotFound();
+        }
 
-        // if (auction.Seller == User.Identity.Name)
-        // {
-        //     return BadRequest("You cannot bid on your own auction");
-        // }
+        if (auction.Seller == User.Identity.Name)
+        {
+            return BadRequest("You cannot bid on your own auction");
+        }
 
         var bid = new Bid()
         {
             Amount = amount,
             AuctionId = auctionId,
-            // Bidder = User.Identity.Name
+            Bidder = User.Identity.Name
         };
 
 
@@ -70,7 +74,9 @@ public class BidsController
 
         await DB.SaveAsync(bid);
 
-        return _mapper.Map<BidDto>(bid);
+        await _publishEndpoint.Publish(_mapper.Map<BidPlaced>(bid));
+
+        return Ok(_mapper.Map<BidDto>(bid));
     }
 
     [HttpGet("{auctionId}")]
