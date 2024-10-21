@@ -10,6 +10,7 @@ import Heading from "@/app/components/Heading";
 import { getCurrentUser } from "@/app/actions/authActions";
 import EditButton from "./EditButton";
 import DeleteButton from "./DeleteButton";
+import BidItem from "./BidItem";
 
 export default async function Details({ params }: { id: string }) {
   const data = await getDetailedViewData(params.id);
@@ -40,7 +41,7 @@ export default async function Details({ params }: { id: string }) {
           <Heading title="Bids" />
           {bids.map((bid) => (
             <p key={bid.id}>
-              {bid.bidder} - {bid.amount}
+              <BidItem key={bid.id} bid={bid} />
             </p>
           ))}
         </div>
