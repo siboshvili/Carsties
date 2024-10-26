@@ -1,4 +1,4 @@
-import Listings from "./auctions/listings";
+import Listings from "./auctions/Listings";
 
 export default function Home() {
   return (

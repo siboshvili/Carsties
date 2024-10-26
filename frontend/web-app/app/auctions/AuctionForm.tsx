@@ -4,7 +4,6 @@ import { Button } from "flowbite-react";
 import React, { useEffect } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import Input from "../components/Input";
-import DateInput from "../components/DateInput";
 import { createAuction, updateAuction } from "../actions/auctionActions";
 import { usePathname, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -32,7 +31,7 @@ export default function AuctionForm({ auction }: Props) {
       reset({ make, model, color, mileage, year });
     }
     setFocus("make");
-  }, [setFocus]);
+  }, [setFocus, reset, auction]);
 
   async function onSubmit(data: FieldValues) {
     try {
@@ -110,14 +109,6 @@ export default function AuctionForm({ auction }: Props) {
               control={control}
               type="number"
               rules={{ required: "Reserve price is required" }}
-            />
-            <DateInput
-              label="Auction end date/time"
-              name="auctionEnd"
-              control={control}
-              dateFormat="dd MMMM yyyy h:mm a"
-              showTimeSelect
-              rules={{ required: "Auction end date is required" }}
             />
           </div>
         </>
