@@ -16,17 +16,16 @@ export async function getCurrentUser() {
 
     return session.user;
   } catch (error) {
+    console.log(error);
     return null;
   }
 }
 
 export async function getTokenWorkaround() {
   const req = {
-    headers: Object.fromEntries(headers() as Headers),
+    headers: Object.fromEntries(headers() as any),
     cookies: Object.fromEntries(
-      cookies()
-        .getAll()
-        .map((c) => [c.name, c.value])
+      (await cookies()).getAll().map((c: any) => [c.name, c.value])
     ),
   } as NextApiRequest;
 
