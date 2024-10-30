@@ -1,21 +1,19 @@
-// import EmptyFilter from "@/app/components/EmptyFilter";
-// import React from "react";
+import EmptyFilter from "@/app/components/EmptyFilter";
+import React from "react";
 
-// export default function page({
-//   searchParams,
-// }: {
-//   searchParams: { callbackUrl: string };
-// }) {
-//   return (
-//     <EmptyFilter
-//       title="You need to be logged in to do that"
-//       subtitle="Please click below to sing in"
-//       showLogin
-//       callbackUrl={searchParams.callbackUrl}
-//     />
-//   );
-// }
+type searchParams = Promise<{ callbackUrl: string }>;
 
-export default function page() {
-  return "signin";
+export default async function page({
+  searchParams,
+}: {
+  searchParams: searchParams;
+}) {
+  return (
+    <EmptyFilter
+      title="You need to be logged in to do that"
+      subtitle="Please click below to sing in"
+      showLogin
+      callbackUrl={(await searchParams).callbackUrl}
+    />
+  );
 }
