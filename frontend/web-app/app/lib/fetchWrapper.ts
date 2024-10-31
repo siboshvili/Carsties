@@ -60,7 +60,6 @@ async function handleResponse(response: Response) {
   try {
     data = JSON.parse(text);
   } catch (error) {
-    console.log(error);
     data = text;
   }
 

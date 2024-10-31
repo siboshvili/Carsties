@@ -16,12 +16,11 @@ export default function BidForm({ auctionId, highBid }: Props) {
     register,
     handleSubmit,
     reset,
-    formState: {  },
+    formState: {},
   } = useForm();
   const addBid = useBidStore((state) => state.addBid);
 
   function onSubmit(data: FieldValues) {
-    console.log(highBid);
     if (data.amount <= highBid) {
       reset();
       return toast.error(
@@ -36,7 +35,6 @@ export default function BidForm({ auctionId, highBid }: Props) {
         reset();
       })
       .catch((err) => {
-        console.log(err);
         toast.error(err.message);
       });
   }

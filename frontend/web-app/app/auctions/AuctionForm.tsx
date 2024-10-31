@@ -4,9 +4,10 @@ import { Button } from "flowbite-react";
 import React, { useEffect } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import Input from "../components/Input";
+import DateInput from "../components/DateInput";
 import { createAuction, updateAuction } from "../actions/auctionActions";
 import { usePathname, useRouter } from "next/navigation";
-import toast from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { Auction } from "@/types";
 
 type Props = {
@@ -16,14 +17,15 @@ type Props = {
 export default function AuctionForm({ auction }: Props) {
   const router = useRouter();
   const pathname = usePathname();
-
   const {
     control,
     handleSubmit,
     setFocus,
     reset,
     formState: { isSubmitting, isValid },
-  } = useForm({ mode: "onTouched" });
+  } = useForm({
+    mode: "onTouched",
+  });
 
   useEffect(() => {
     if (auction) {
@@ -69,7 +71,6 @@ export default function AuctionForm({ auction }: Props) {
         control={control}
         rules={{ required: "Model is required" }}
       />
-
       <Input
         label="Color"
         name="color"
@@ -90,9 +91,10 @@ export default function AuctionForm({ auction }: Props) {
           name="mileage"
           control={control}
           type="number"
-          rules={{ required: "Mileage is required" }}
+          rules={{ required: "Model is required" }}
         />
       </div>
+
       {pathname === "/auctions/create" && (
         <>
           <Input
@@ -110,6 +112,14 @@ export default function AuctionForm({ auction }: Props) {
               type="number"
               rules={{ required: "Reserve price is required" }}
             />
+            <DateInput
+              label="Auction end date/time"
+              name="auctionEnd"
+              control={control}
+              dateFormat="dd MMMM yyyy h:mm a"
+              showTimeSelect
+              rules={{ required: "Auction end date is required" }}
+            />
           </div>
         </>
       )}
@@ -119,12 +129,11 @@ export default function AuctionForm({ auction }: Props) {
           Cancel
         </Button>
         <Button
-          type="submit"
           isProcessing={isSubmitting}
           disabled={!isValid}
-          color="success"
-          typeof="submit"
+          type="submit"
           outline
+          color="success"
         >
           Submit
         </Button>

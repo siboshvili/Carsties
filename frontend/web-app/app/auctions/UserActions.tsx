@@ -25,7 +25,6 @@ export default function UserActions({ user }: Props) {
   }
 
   function setSeller() {
-    console.log("a", pathname);
     setParams({ seller: user.username, winner: undefined });
     if (pathname !== "/") router.push("/");
   }

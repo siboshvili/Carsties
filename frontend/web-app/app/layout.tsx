@@ -17,8 +17,8 @@ export default async function RootLayout({
 }>) {
   const user = await getCurrentUser();
   return (
-    <html lang="en" suppressHydrationWarning={true}>
-      <body suppressHydrationWarning={true}>
+    <html lang="en">
+      <body>
         <ToasterProvider />
         <Navbar />
         <main className="container mx-auto px-5 pt-10">
