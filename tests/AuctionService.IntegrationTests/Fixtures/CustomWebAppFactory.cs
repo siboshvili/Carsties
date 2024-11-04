@@ -10,7 +10,7 @@ using WebMotions.Fake.Authentication.JwtBearer;
 
 namespace AuctionService.IntegrationTests.Fixtures;
 
-public class CustomeWebAppFactory : WebApplicationFactory<Program>, IAsyncLifetime
+public class CustomWebAppFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {
 
     private PostgreSqlContainer _postgreSqlContainer = new PostgreSqlBuilder().Build();

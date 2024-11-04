@@ -8,13 +8,15 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AuctionService.IntegrationTests;
 
-public class AuctionControllerTests : IClassFixture<CustomeWebAppFactory>, IAsyncLifetime
+
+[Collection("Shared collection")]
+public class AuctionControllerTests : IAsyncLifetime
 {
-    private readonly CustomeWebAppFactory _factory;
+    private readonly CustomWebAppFactory _factory;
     private readonly HttpClient _httpClient;
     private readonly string _gT_ID = "afbee524-5972-4075-8800-7d1f9d7b0a0c";
 
-    public AuctionControllerTests(CustomeWebAppFactory factory)
+    public AuctionControllerTests(CustomWebAppFactory factory)
     {
         _factory = factory;
         _httpClient = factory.CreateClient();
@@ -165,4 +167,8 @@ public class AuctionControllerTests : IClassFixture<CustomeWebAppFactory>, IAsyn
             ReservePrice = 10
         };
     }
+}
+
+public class CustomeWebAppFactory
+{
 }

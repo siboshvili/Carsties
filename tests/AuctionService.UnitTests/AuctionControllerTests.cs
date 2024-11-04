@@ -85,7 +85,7 @@ public class AuctionControllerTests
         var result = await _controller.GetAuctionById(Guid.NewGuid());
 
         // assert
-        Assert.IsType<NotFoundResult>(result);
+        Assert.IsType<NotFoundResult>(result.Result);
     }
 
     [Fact]
